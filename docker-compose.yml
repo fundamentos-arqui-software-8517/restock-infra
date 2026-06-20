@@ -23,6 +23,19 @@ services:
     networks:
       - restock-net
 
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: restock-mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto-data:/mosquitto/data
+      - mosquitto-log:/mosquitto/log
+    networks:
+      - restock-net
+
   backend-1:
     image: ${BACKEND_IMAGE}
     container_name: restock-backend-1
@@ -30,6 +43,7 @@ services:
     depends_on:
       - mongodb
       - redis
+      - mosquitto
     expose:
       - "8080"
     environment:
@@ -43,6 +57,8 @@ services:
       CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME}
       CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY}
       CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET}
+      MQTT_ENABLED: ${MQTT_ENABLED}
+      MQTT_BROKER_URL: ${MQTT_BROKER_URL}
     networks:
       - restock-net
 
@@ -53,6 +69,7 @@ services:
     depends_on:
       - mongodb
       - redis
+      - mosquitto
     expose:
       - "8080"
     environment:
@@ -66,6 +83,8 @@ services:
       CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME}
       CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY}
       CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET}
+      MQTT_ENABLED: ${MQTT_ENABLED}
+      MQTT_BROKER_URL: ${MQTT_BROKER_URL}
     networks:
       - restock-net
 
@@ -81,12 +100,15 @@ services:
     depends_on:
       - backend-1
       - backend-2
+      - mosquitto
     networks:
       - restock-net
 
 volumes:
   mongodb-data:
   redis-data:
+  mosquitto-data:
+  mosquitto-log:
 
 networks:
   restock-net:

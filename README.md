@@ -26,6 +26,12 @@ Una vez que la imagen oficial esta publicada en Docker Hub, cualquier desarrolla
 
 ---
 
+## Despliegue en Azure VM (Producción)
+
+Si estás listo para realizar el despliegue "Lift and Shift" de la solución en la nube, consulta la guía detallada paso a paso en [DEPLOY_AZURE.md](file:///d:/Julio/Universidad/Ciclo7/Fundamentos/restock-infra/DEPLOY_AZURE.md).
+
+---
+
 ## Configuracion Inicial
 
 Si es la primera vez que clonas este repositorio en tu maquina, debes configurar las variables de entorno locales:
