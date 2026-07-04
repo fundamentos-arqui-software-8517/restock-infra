@@ -69,6 +69,15 @@ services:
     networks:
       - restock-net
 
+  frontend:
+    image: ${FRONTEND_IMAGE}
+    container_name: restock-frontend
+    restart: unless-stopped
+    expose:
+      - "80"
+    networks:
+      - restock-net
+
   nginx:
     image: nginx:alpine
     container_name: restock-nginx
@@ -77,10 +86,10 @@ services:
       - "80:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - ../restock-web-application/dist/restock-web-application/browser:/usr/share/nginx/html:ro
     depends_on:
       - backend-1
       - backend-2
+      - frontend
     networks:
       - restock-net
 
