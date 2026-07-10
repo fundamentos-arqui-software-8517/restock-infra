@@ -12,7 +12,7 @@ La regla principal es: **Aqui no se programa**. Este repositorio solo se usa par
 Si estas trabajando en una nueva funcionalidad o corrigiendo un bug (ya sea en Angular o Spring Boot), debes hacerlo en tus respectivos repositorios (`restock-web-app` o `restock-web-service`).
 
 ### 2. Integracion Continua (CI)
-Cuando finalizas tu tarea y haces push a las ramas principales (`develop` o `main`), los flujos de GitHub Actions tomaran tu codigo, lo compilaran y crearan una imagen inmutable en Docker Hub (por ejemplo, `julioxc4/restock-web-service:latest`).
+Cuando finalizas tu tarea y haces push a las ramas principales (`develop` o `main`), los flujos de GitHub Actions tomaran tu codigo, lo compilaran y crearan una imagen inmutable en Docker Hub (por ejemplo, `julioxc4/restock-web-service:latest` o `julioxc4/restock-web-application:latest`).
 
 ### 3. Orquestacion (Este repositorio)
 Una vez que la imagen oficial esta publicada en Docker Hub, cualquier desarrollador puede venir a este repositorio para descargar esa nueva version y levantar la plataforma completa con todos sus servicios interconectados.
