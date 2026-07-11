@@ -36,6 +36,7 @@ services:
       STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-dummy}
       STRIPE_SUCCESS_URL: ${STRIPE_SUCCESS_URL:-http://localhost:4200/subscriptions/success}
       STRIPE_CANCEL_URL: ${STRIPE_CANCEL_URL:-http://localhost:4200/subscriptions/cancel}
+      EDGE_SERVICE_URL: ${EDGE_SERVICE_URL}
     networks:
       - restock-net
 
@@ -65,6 +66,7 @@ services:
       STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-dummy}
       STRIPE_SUCCESS_URL: ${STRIPE_SUCCESS_URL:-http://localhost:4200/subscriptions/success}
       STRIPE_CANCEL_URL: ${STRIPE_CANCEL_URL:-http://localhost:4200/subscriptions/cancel}
+      EDGE_SERVICE_URL: ${EDGE_SERVICE_URL}
     networks:
       - restock-net
 
