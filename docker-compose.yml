@@ -1,17 +1,4 @@
 services:
-  mongodb:
-    image: mongo:7
-    container_name: restock-mongodb
-    restart: unless-stopped
-    environment:
-      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb-data:/data/db
-    networks:
-      - restock-net
-
   redis:
     image: redis:7-alpine
     container_name: restock-redis
@@ -28,13 +15,12 @@ services:
     container_name: restock-backend-1
     restart: unless-stopped
     depends_on:
-      - mongodb
       - redis
     expose:
       - "8080"
     environment:
       PORT: 8080
-      MONGODB_URI: mongodb://mongodb:27017
+      MONGODB_URI: ${MONGODB_URI}
       MONGODB_DATABASE: ${MONGODB_DATABASE}
       REDIS_HOST: redis
       REDIS_PORT: 6379
@@ -58,13 +44,12 @@ services:
     container_name: restock-backend-2
     restart: unless-stopped
     depends_on:
-      - mongodb
       - redis
     expose:
       - "8080"
     environment:
       PORT: 8080
-      MONGODB_URI: mongodb://mongodb:27017
+      MONGODB_URI: ${MONGODB_URI}
       MONGODB_DATABASE: ${MONGODB_DATABASE}
       REDIS_HOST: redis
       REDIS_PORT: 6379
@@ -108,7 +93,6 @@ services:
       - restock-net
 
 volumes:
-  mongodb-data:
   redis-data:
 
 networks:
